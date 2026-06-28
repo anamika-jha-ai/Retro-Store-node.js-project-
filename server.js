@@ -1,13 +1,21 @@
 import http from 'node:http'
+import path from 'node:path'
+// import { testPath } from './utils/testPath.js'
 
 const PORT = 8000
 
-console.log(import.meta.dirname)
+const __dirname = import.meta.dirname
 
 const server = http.createServer((req, res)=> {
-  res.statusCode = 200
+
+  const absPathToResource = path.join(__dirname, 'public', 'index.html')
+  const relPathToResource = path.join('public', 'index.html')
+  console.log('absolute: ', absPathToResource)
+  console.log('relative: ', relPathToResource)
+
+  res.statusCode = 200 
   res.setHeader('Content-Type', 'text/html')
   res.end()
 })
 
-server.listen(PORT, () => console.log('connected on port 8000') )
+server.listen(PORT, () => console.log('connected on port 8000'))
